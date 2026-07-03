@@ -2,3 +2,4 @@ venv/*
 nexus_web/__pycache__/*
 nexus_web/controller/__pycache__/*
 nexus_web/routers/__pycache__/*
+**/__pycache__/
