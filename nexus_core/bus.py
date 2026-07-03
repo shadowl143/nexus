@@ -5,12 +5,12 @@ import logging
 logger = logging.getLogger("nexus_core.bus")
 
 class EventBus:
-    def __init__(self):
+    def __init__(self) -> None:
         # Diccionario que asocia un "nombre_evento" con una lista de funciones callback
         # Ej: {"rider.created": [audit_service.log_event, kpi_service.update_metrics]}
         self._listeners: Dict[str, List[Callable[[Any], None]]] = {}
 
-    def subscribe(self, event_type: str, callback: Callable[[Any], None]):
+    def subscribe(self, event_type: str, callback: Callable[[Any], None]) -> None:
         """Registra una función para que se ejecute cuando ocurra un evento específico."""
         if event_type not in self._listeners:
             self._listeners[event_type] = []
@@ -20,7 +20,7 @@ class EventBus:
             self._listeners[event_type].append(callback)
             logger.info(f"Servicio suscrito con éxito al evento: '{event_type}'")
 
-    def publish(self, event_type: str, event_data: Any):
+    def publish(self, event_type: str, event_data: Any) -> None:
         """Dispara el evento y ejecuta todas las funciones suscritas a él."""
         if event_type not in self._listeners or not self._listeners[event_type]:
             logger.warning(f"Evento '{event_type}' publicado, pero nadie lo está escuchando.")

@@ -1,0 +1,16 @@
+// .vscode/settings.json
+{
+    "python.formatting.provider": "black",
+    "editor.formatOnSave": true,
+    "python.linting.enabled": true,
+    "python.linting.ruffEnabled": true,
+    "python.linting.mypyEnabled": true,
+    "python.linting.mypyArgs": [
+        "--strict",
+        "nexus_core/"
+    ],
+    "python.linting.ruffArgs": [
+        "--select",
+        "E,F,W,C90"
+    ]
+}

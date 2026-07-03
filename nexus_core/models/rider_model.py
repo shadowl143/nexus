@@ -1,11 +1,9 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Float
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, String
 from nexus_core.models.database import Base
-from sqlalchemy.orm import declarative_base, relationship
+from sqlalchemy.orm import relationship
+from sqlalchemy.ext.declarative import declarative_base
+
 Base = declarative_base()
-
-TIPOS_BICI = ("electric", "standard", "cargo")
-
 class Rider(Base):
     """Repartidor de EcoLogistica."""
     __tablename__ = "riders"
@@ -19,6 +17,6 @@ class Rider(Base):
     entregas = relationship('Entrega', back_populates='rider')
 
     # Método para depuración en consola
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"<Rider(name='{self.name}', bike='{self.bike_type}')>"
     
