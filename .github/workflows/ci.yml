@@ -1,0 +1,47 @@
+name: Continuous Integration (Nexus Core)
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main", "develop" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Descargar el código del repositorio
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # 2. Configurar la versión de Python
+    - name: Set up Python
+      uses: actions/with-python@v5
+      with:
+        python-version: '3.11' # Ajusta a la versión exacta que uses
+
+    # 3. Configurar Caché de Pip para acelerar futuras ejecuciones
+    - name: Cache pip packages
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements-dev.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    # 4. Instalar dependencias en el entorno virtual del servidor
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
+
+    # 5. Inicializar base de datos de prueba (SQLite local)
+    - name: Setup SQLite Test Database
+      run: |
+        touch nexus.db
+
+    # 6. Ejecutar pruebas unitarias (Buscando la carpeta 'tests/' de tu imagen)
+    - name: Run tests with pytest
+      run: |
+        pytest
