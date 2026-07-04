@@ -1,6 +1,6 @@
 COLORS = {
 
-"bg.primary": "#0F172A", # slate-900
+"bg.primary": "#143A93", # slate-900
 
 "bg.surface": "#1E293B", # slate-800
 

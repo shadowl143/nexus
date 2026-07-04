@@ -1,9 +1,6 @@
 from sqlalchemy import Column, Integer, String
 from nexus_core.models.database import Base
 from sqlalchemy.orm import relationship
-from sqlalchemy.ext.declarative import declarative_base
-
-Base = declarative_base()
 class Rider(Base):
     """Repartidor de EcoLogistica."""
     __tablename__ = "riders"
