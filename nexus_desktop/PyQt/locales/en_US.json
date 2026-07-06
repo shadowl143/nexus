@@ -1,0 +1,20 @@
+{
+  "tittles": {
+    "rider": "Rider catalog",
+    "delivered": "Delivered Catalog"
+  },
+  "welcome": "welcome to the app test",
+  "id": "id",
+  "name": "Name",
+  "bike_type": "byke type",
+  "rider_id": "rider id",
+  "distance": "distance",
+  "co2_saved": "Saved of c02",
+  "bottons": {
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "message_modal": {
+    "save": "Are you sure you want to save the data?"
+  }
+}

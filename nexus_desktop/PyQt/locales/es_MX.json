@@ -1,0 +1,20 @@
+{
+  "tittles": {
+    "rider": "Catalogo de rider",
+    "delivered": "Calatolog de entregas"
+  },
+  "welcome": "Bienvenidos a la aplicación de prueba",
+  "id": "id",
+  "name": "Nombre",
+  "bike_type": "tipo de bici",
+  "rider_id": "rider_id",
+  "distance": "distancia",
+  "co2_saved": "Ahorro de c02",
+  "bottons": {
+    "save": "Guardar",
+    "cancel": "Cancelar"
+  },
+  "message_modal": {
+    "save": "¿Seguro que desea guardar los datos?"
+  }
+}
