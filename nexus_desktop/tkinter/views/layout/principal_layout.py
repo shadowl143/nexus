@@ -1,12 +1,11 @@
-import ttkbootstrap as tb 
-from nexus_desktop.tkinter.views.component.button_component import WidgetButtons
+import ttkbootstrap as tb
 from nexus_core.design_tokens import TYPOGRAPHY
 
 class WindowsPrincipal():
     def __init__(self, pantallas: dict[str, tb.Frame]):
         self.root = tb.Window(themename="flatly") 
         self.root.title("Proyecto integrador")
-        self.root.minsize(900, 700)
+        self.root.minsize(2000, 900)
         self.root.columnconfigure(0, weight=1)
         self.root.rowconfigure(0, weight=1)  
         self.pantallas = pantallas

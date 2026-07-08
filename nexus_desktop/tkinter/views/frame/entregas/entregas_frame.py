@@ -2,7 +2,7 @@ import ttkbootstrap as tb
 from nexus_desktop.tkinter.views.component.label.label_tittle_widget import LabelTittleWidget
 from nexus_desktop.tkinter.views.component.label.label_text_widget import LabelTextWidget
 from nexus_desktop.tkinter.views.component.table.table_widget import TableFrame
-from nexus_desktop.tkinter.views.component.button_component import WidgetButtons
+from nexus_desktop.tkinter.views.component.button.button_component import WidgetButtons
 from nexus_desktop.tkinter.services.multi_lenguage.multi_lenguage_service import MultiLanguageService
 
 class EntregasFrame():

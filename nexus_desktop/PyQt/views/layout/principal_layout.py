@@ -1,5 +1,5 @@
 import ttkbootstrap as tb 
-from nexus_desktop.tkinter.views.component.button_component import WidgetButtons
+from nexus_desktop.tkinter.views.component.button.button_component import WidgetButtons
 from nexus_core.design_tokens import TYPOGRAPHY
 
 class WindowsPrincipal():
