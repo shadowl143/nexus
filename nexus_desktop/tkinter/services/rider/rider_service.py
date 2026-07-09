@@ -1,10 +1,11 @@
 from nexus_desktop.tkinter.view_model.rider_vm import RiderVM
 
 rider_table = [
-    RiderVM(id=1, name="nombre1", bike_type="datos1"),
-    RiderVM(id=2, name="nombre2", bike_type="datos2"),
-    RiderVM(id=3, name="nombre3", bike_type="datos3"),
-    RiderVM(id=4, name="nombre4", bike_type="datos4"),
+    RiderVM(id=1, name="Ana Torres", bike_type="electric"),
+    RiderVM(id=2, name="Luis Mendoza", bike_type="cargo"),
+    RiderVM(id=3, name="Carla Ruiz", bike_type="standard"),
+    RiderVM(id=4, name="Diego Paz", bike_type="electric"),
+    RiderVM(id=4, name="Marina Solis", bike_type="cargo"),
 ]
 
 
@@ -17,7 +18,7 @@ class RiderService:
         return model
 
     def rider_select(self) -> list[RiderVM]:
-        model = [(r.id, r.name) for r in rider_table]
+        model = [r for r in rider_table]
         return model
 
     def save_rider(self, rider: RiderVM):

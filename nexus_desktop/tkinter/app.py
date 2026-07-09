@@ -31,7 +31,7 @@ if __name__ == "__main__":
             contenedor, shared
         ).crear_frame_inicio(),
         "Entregas": lambda contenedor: entregas.EntregasFrame(
-            contenedor, shared, entrega_controller
+            contenedor, shared, entrega_controller, ridercontroller
         ).crear_frame_inicio(),
         "Riders": lambda contenedor: frame.RidesFrame(
             contenedor, shared, ridercontroller
