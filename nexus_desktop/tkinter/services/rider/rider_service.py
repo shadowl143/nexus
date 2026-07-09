@@ -14,16 +14,16 @@ class RiderService:
 
     def rider_list(self) -> list[RiderVM]:
         model = [(r.id, r.name, r.bike_type) for r in rider_table]
-        print(*model, sep="\n")
+        return model
+
+    def rider_select(self) -> list[RiderVM]:
+        model = [(r.id, r.name) for r in rider_table]
         return model
 
     def save_rider(self, rider: RiderVM):
-        # Aquí deberías implementar la lógica para guardar el rider
-        # Por ejemplo, agregarlo a la lista si no existe
         if rider not in rider_table:
             rider_table.append(rider)
 
     def remove_rider(self, rider: RiderVM):
-        # Método para eliminar un rider de la lista
         if rider in rider_table:
             rider_table.remove(rider)

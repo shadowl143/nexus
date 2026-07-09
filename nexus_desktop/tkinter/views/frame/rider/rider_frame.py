@@ -7,6 +7,7 @@ from nexus_desktop.tkinter.views.component.label.label_text_widget import (
 )
 from nexus_desktop.tkinter.views.component.table.table_widget import TableFrame
 from nexus_desktop.tkinter.views.component.button.button_component import WidgetButtons
+from nexus_desktop.tkinter.views.component.messge_box.message_box import MessageBox
 from nexus_desktop.tkinter.services.multi_lenguage.multi_lenguage_service import (
     MultiLanguageService,
 )
@@ -70,26 +71,29 @@ class RidesFrame:
         self.txt_bike_type = LettersEntry(parent=form_raider)
         self.txt_bike_type.grid(row=1, column=1)
 
-        button = WidgetButtons(parent=form_raider, command=self.hola_mundo)
+        button = WidgetButtons(parent=form_raider, command=self.crear_nuevo)
         button.grid(row=2, column=1, sticky="SE")
 
-    def hola_mundo(self):
-        modelo = RiderVM(
-            id=len(self.data) + 1,
-            name=self.txt_name.get(),
-            bike_type=self.txt_bike_type.get(),
-        )
-        self.rider_controller.save_rider(modelo)
-        self.reload_table()
+    def crear_nuevo(self):
+        respuesta = MessageBox(
+            self.contenedor_principal,
+            message=self.lenguage["modal"]["save"],
+            title=self.lenguage["modal"]["message"],
+        ).msg_save()
 
-    def reload_table(self) -> None:
-        # 1) limpiar filas actuales
-        for item_id in self.table.tree.get_children():
-            self.table.tree.delete(item_id)
-
-        # 2) pedir datos
-        self.data = self.rider_controller.rider_list()
-
-        # 3) insertar filas
-        for r in self.data:
-            self.table.tree.insert("", "end", values=r)
+        print(f"respuesta {respuesta}")
+        if respuesta == "Si":
+            modelo = RiderVM(
+                id=len(self.data) + 1,
+                name=self.txt_name.get(),
+                bike_type=self.txt_bike_type.get(),
+            )
+            self.rider_controller.save_rider(modelo)
+            self.data = self.rider_controller.rider_list()
+            self.table.reload_table(self.data)
+        else:
+            MessageBox(
+                parent=self.contenedor_principal,
+                title=self.lenguage["modal"]["cancel"],
+                message=self.lenguage["modal"]["message_cancel"],
+            ).msg_information()

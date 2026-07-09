@@ -30,7 +30,9 @@ class TableFrame(tb.Frame):
         self.tree.grid(row=0, column=0, sticky="n")
         for col in columns:
             self.tree.heading(col, text=col)
-            self.tree.column(col, anchor="center", width=220, minwidth=150, stretch=True)
+            self.tree.column(
+                col, anchor="center", width=220, minwidth=150, stretch=True
+            )
 
         for row in data:
             self.tree.insert("", "end", values=row)
@@ -48,3 +50,12 @@ class TableFrame(tb.Frame):
         kwargs.setdefault("padx", self.DEFAULT_PADX)
         kwargs.setdefault("pady", self.DEFAULT_PADY)
         return super().grid(**kwargs)
+
+    def reload_table(self, value) -> None:
+        # 1) limpiar filas actuales
+        for item_id in self.tree.get_children():
+            self.tree.delete(item_id)
+
+        # 3) insertar filas
+        for r in value:
+            self.tree.insert("", "end", values=r)

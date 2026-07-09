@@ -11,6 +11,10 @@ class RiderController:
         rider = self.rider_service.rider_list()
         return rider
 
+    def rider_select(self) -> list[RiderVM]:
+        rider = self.rider_service.rider_select()
+        return rider
+
     def save_rider(self, rider: RiderVM):
         self.rider_service.save_rider(rider)
 
