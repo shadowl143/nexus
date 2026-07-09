@@ -14,7 +14,10 @@
     "save": "Guardar",
     "cancel": "Cancelar"
   },
-  "message_modal": {
-    "save": "¿Seguro que desea guardar los datos?"
+  "modal": {
+    "save": "¿Seguro que desea guardar los datos?",
+    "cancel": "Accion cancelada",
+    "message": "Guadar information, este proceso no se puede revertir",
+    "message_cancel": "Cancelado por el usuario"
   }
 }
