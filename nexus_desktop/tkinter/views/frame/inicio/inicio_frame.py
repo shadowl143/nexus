@@ -1,6 +1,4 @@
 import ttkbootstrap as tb
-import tkinter as tk
-import locale
 from nexus_desktop.tkinter.views.component.label.label_tittle_widget import (
     LabelTittleWidget,
 )
