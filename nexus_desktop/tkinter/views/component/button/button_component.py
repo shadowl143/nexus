@@ -1,33 +1,19 @@
 import ttkbootstrap as tb
 import nexus_core.design_tokens as design
 
+
 class WidgetButtons(tb.Button):
     DEFAULT_PADX = 15
     DEFAULT_PADY = 15
-    
-    def __init__(self, parent, button_text: str = "Guardar", command=None, **kwargs):
-        style = tb.Style()
-        style_name = "Custom.TButton"
 
-        style.configure(
-            style_name,
-            background=design.COLORS["bg.primary"],
-            foreground=design.COLORS["text.primary"],
-            font=(
-                design.TYPOGRAPHY["font.family.sans"],
-                design.TYPOGRAPHY["font.size.body"],
-                "bold",
-            ),
-        )
+    def __init__(self, parent, button_text: str = "Guardar", command=None, **kwargs):
         super().__init__(
             parent,
             text=button_text,
             command=command,
-            style=style_name,
             **kwargs,
         )
-    
-    
+
     # Defaults para pack
     def pack(self, **kwargs):
         kwargs.setdefault("padx", self.DEFAULT_PADX)

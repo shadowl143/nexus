@@ -2,17 +2,43 @@ import ttkbootstrap as tb
 import os
 import sys
 from nexus_core.design_tokens import TYPOGRAPHY
+from nexus_core.theme import mode_dark
+import tkinter as tk
+from nexus_desktop.tkinter.views.frame.inicio import inicio_frame as inicio
+from nexus_desktop.tkinter.views.frame.entregas import entregas_frame as entregas
+from nexus_desktop.tkinter.views.frame.rider import rider_frame as rider
+import locale
+
+from nexus_desktop.tkinter.controllers.rider.rider_controller import RiderController
+from nexus_desktop.tkinter.services.rider.rider_service import RiderService
+from nexus_desktop.tkinter.services.entregas.entregas_service import EntregaService
+from nexus_desktop.tkinter.controllers.entregas.entrega_controller import (
+    EntregaController,
+)
+import os
+
+rider_service = RiderService()
+ridercontroller = RiderController(rider_service)
+
+entregas_service = EntregaService()
+entrega_controller = EntregaController(entregas_service)
 
 
 class WindowsPrincipal:
-    def __init__(self, pantallas: dict[str, tb.Frame]):
+    def __init__(self, mode=False):
         # configuracion ventana principal
         self.root = tb.Window(themename="flatly")
+
+        self.dark_var = tk.BooleanVar(master=self.root, value=mode)
+        mode_dark(self.root, self.dark_var.get())
+
+        self.languge = tk.StringVar(master=self.root, value=self.get_system_language())
+
         self.root.title("Proyecto integrador")
         self.root.minsize(2000, 900)
         self.root.columnconfigure(0, weight=1)
         self.root.rowconfigure(0, weight=1)
-        self.pantallas = pantallas
+        self.pantallas = self.frames()
         self.menu_lateral = tb.Frame(self.root, width=150, relief="solid")
         self.root.protocol("WM_DELETE_WINDOW", self.cerrar_limpio)
         local_path = os.path.join("nexus_desktop", "tkinter", "assets", "icon.ico")
@@ -32,7 +58,6 @@ class WindowsPrincipal:
             boton = tb.Button(
                 self.menu_lateral,
                 text=nombre_pantalla,
-                bootstyle="link",
                 command=lambda name=nombre_pantalla: self.select_frame(name),
             )
             boton.pack(fill="x", padx=15, pady=8, anchor="w")
@@ -48,6 +73,31 @@ class WindowsPrincipal:
         self.pantallas[self.windows].pack_forget()
         self.pantallas[name].pack(fill="both", expand=True)
         self.windows = name
+
+    def frames(self):
+
+        frames = {
+            "Inicio": lambda contenedor: inicio.InicioFrame(
+                contenedor, self.languge, self.dark_var, self.toggle_theme
+            ).crear_frame_inicio(),
+            "Entregas": lambda contenedor: entregas.EntregasFrame(
+                contenedor, self.languge.get(), entrega_controller, ridercontroller
+            ).crear_frame_inicio(),
+            "Riders": lambda contenedor: rider.RidesFrame(
+                contenedor, self.languge.get(), ridercontroller
+            ).crear_frame_inicio(),
+        }
+        return frames
+
+    def toggle_theme(self):
+        print(self.dark_var.get())
+        mode_dark(self.root, self.dark_var.get())
+
+    @staticmethod
+    def get_system_language():
+        # Obtiene el lenguaje del sistema
+        lang, _ = locale.getdefaultlocale()
+        return lang
 
     def iniciar(self):
         self.root.mainloop()

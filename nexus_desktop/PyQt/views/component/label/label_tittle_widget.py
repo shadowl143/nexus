@@ -1,56 +1,30 @@
-
 from PyQt6.QtWidgets import QLabel
 from PyQt6.QtGui import QFont
 from PyQt6.QtCore import Qt
 import nexus_core.design_tokens as design
-class LabelTittleWidget:
-    def __init__(self, parent, text: str,
-        pady: int = 20,
-        padx: int = 0):
 
-        self.label = QLabel(text, parent)
 
+class LabelTitleWidget(QLabel):
+
+    DEFAULT_PADX = 15
+    DEFAULT_PADY = 15
+
+    def __init__(self, text: str, parent=None, pady: int = 20, padx: int = 0):
+        super().__init__(text, parent)
+
+        # ✅ Fuente
         font = QFont(
-            design.TYPOGRAPHY["font.family.sans"],
-            design.TYPOGRAPHY["font.size.h1"]
+            design.TYPOGRAPHY["font.family.sans"], design.TYPOGRAPHY["font.size.h1"]
         )
+        font.setBold(True)
+        self.setFont(font)
 
-        self.label.setFont(font)
+        # ✅ Centrar texto
+        self.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.label.setAlignment(
-            Qt.AlignmentFlag.AlignCenter
-        )
-
-        self.label.setStyleSheet(f"""
-            padding:{pady}px {padx}px;
+        # ✅ Padding interno
+        self.setStyleSheet(f"""
+            QLabel {{
+                padding: {pady}px {padx}px;
+            }}
         """)
-        
-    # 2. Creamos nuestro propio método pack
-    def pack(self, **kwargs):
-        # Configuramos valores por defecto si el usuario no los envía
-        if "anchor" not in kwargs:
-            kwargs["anchor"] = "n"
-        if "pady" not in kwargs:
-            kwargs["pady"] = 20
-            
-        self.label.pack(**kwargs)
-        return self # Permite encadenar código si se desea
-
-    # 3. Creamos nuestro propio método grid
-    def grid(self, row: int = 0, column: int = 0, rowspan: int = 1, columnspan: int = 1, **kwargs):
-        """Posicionamiento estructurado con Grid (Soporta filas y columnas combinadas)"""
-        # Configuraciones de alineación por defecto si el usuario no las envía
-        if "sticky" not in kwargs:
-            kwargs["sticky"] = ""
-        if "pady" not in kwargs:
-            kwargs["pady"] = 20
-
-        # Inyectar los parámetros estructurados dentro de la ejecución de Tkinter
-        self.label.grid(
-            row=row, 
-            column=column, 
-            rowspan=rowspan, 
-            columnspan=columnspan, 
-            **kwargs
-        )
-        return self

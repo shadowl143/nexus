@@ -1,20 +1,25 @@
 import ttkbootstrap as tb
 import nexus_core.design_tokens as design
 
+
 class LabelTittleWidget(tb.Label):
     DEFAULT_PADX = 15
     DEFAULT_PADY = 15
-    def __init__(self, tbframe: tb.Frame, text:str, pady:int = 20, padx : int=0):
-       super().__init__(
-            tbframe, 
-            text= text, 
-            font=(design.TYPOGRAPHY["font.family.sans"],
-            design.TYPOGRAPHY['font.size.h1']),
+
+    def __init__(self, tbframe: tb.Frame, text: str):
+        super().__init__(
+            tbframe,
+            text=text,
+            font=(
+                design.TYPOGRAPHY["font.family.sans"],
+                design.TYPOGRAPHY["font.size.h1"],
+            ),
             justify="center",  # 🎯 Asegura que el texto se mantenga centrado internamente
-            anchor="center",    # 🎯 Centra el contenido dentro del bloque del Label
-            padding= 5
-       )
-    
+            anchor="center",  # 🎯 Centra el contenido dentro del bloque del Label
+            padding=5,
+            style="App.TLabel",
+        )
+
     # Defaults para pack
     def pack(self, **kwargs):
         kwargs.setdefault("padx", self.DEFAULT_PADX)

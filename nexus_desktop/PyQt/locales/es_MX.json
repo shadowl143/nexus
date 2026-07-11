@@ -1,8 +1,4 @@
 {
-  "tittles": {
-    "rider": "Catalogo de rider",
-    "delivered": "Calatolog de entregas"
-  },
   "welcome": "Bienvenidos a la aplicación de prueba",
   "id": "id",
   "name": "Nombre",
@@ -14,7 +10,20 @@
     "save": "Guardar",
     "cancel": "Cancelar"
   },
-  "message_modal": {
-    "save": "¿Seguro que desea guardar los datos?"
+  "tittles": {
+    "rider": "Catalogo de rider",
+    "delivered": "Calatolog de entregas",
+    "home": "Inicio"
+  },
+  "menu": {
+    "home": "Inicio",
+    "rider": "Riders",
+    "delivered": "Entregas"
+  },
+  "modal": {
+    "save": "¿Seguro que desea guardar los datos?",
+    "cancel": "Accion cancelada",
+    "message": "Guadar information, este proceso no se puede revertir",
+    "message_cancel": "Cancelado por el usuario"
   }
 }

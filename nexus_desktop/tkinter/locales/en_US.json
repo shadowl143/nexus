@@ -15,6 +15,9 @@
     "cancel": "Cancel"
   },
   "message_modal": {
-    "save": "Are you sure you want to save the data?"
+    "save": "Are you sure you want to save the data?",
+    "cancel": "Accion cancelada",
+    "message": "Guadar information, este proceso no se puede revertir",
+    "message_cancel": "Cancelado por el usuario"
   }
 }

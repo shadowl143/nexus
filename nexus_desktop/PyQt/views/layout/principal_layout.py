@@ -1,50 +1,55 @@
-import ttkbootstrap as tb 
-from nexus_desktop.tkinter.views.component.button.button_component import WidgetButtons
-from nexus_core.design_tokens import TYPOGRAPHY
-
-class WindowsPrincipal():
-    def __init__(self, pantallas: dict[str, tb.Frame]):
-        self.root = tb.Window(themename="flatly") 
-        self.root.title("Proyecto integrador")
-        self.root.minsize(900, 700)
-        self.root.columnconfigure(0, weight=1)
-        self.root.rowconfigure(0, weight=1)  
-        self.pantallas = pantallas
-        self.menu_lateral = tb.Frame(self.root, width= 150, relief="solid")
-        # 2. ¡CRUCIAL! Evita que el Frame se encoja al tamaño de los textos
-        self.menu_lateral.pack_propagate(False) 
-        self.menu_lateral.pack(side= "left", fill="y", padx=(0, 10))
-        self.windows = ""
-        self.mostrar_pantalla("Riders")
-        self.crear_botones_menu()
+from PyQt6.QtWidgets import QMainWindow, QVBoxLayout, QPushButton, QWidget, QHBoxLayout
+from nexus_desktop.PyQt.services.multi_lenguage_service import MultiLanguageService
+import nexus_core.design_tokens as desing
 
 
-    def crear_botones_menu(self):
-        # Crear un botón para cada pantalla disponible
-        for nombre_pantalla in self.pantallas.keys():
-            boton = tb.Button(
-                self.menu_lateral, 
-                text=nombre_pantalla, 
-                bootstyle="link",
-                command=lambda name=nombre_pantalla: self.select_frame(name)
-            )
-            boton.pack(fill="x", padx=15, pady=8, anchor="w") 
+class WindowsPrincipal(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.lenguage = MultiLanguageService().load_transaction()
+        print(self.lenguage)
+        self.setup_ui()
 
-    def mostrar_pantalla(self, nombre_pantalla):
-        print(self.pantallas)
-        for nombre, creador_frame in self.pantallas.items():
-            # Ejecutamos la función fábrica pasando el contenedor adecuado
-            self.pantallas[nombre] = creador_frame(self.root)
-            self.pantallas[nombre].pack_forget()
-        self.windows = nombre_pantalla
-        self.pantallas[nombre_pantalla].pack(fill="both", expand=True)
+    def setup_ui(self):
+        self.setWindowTitle(self.lenguage.get("welcome", "App"))
+        self.setGeometry(200, 200, 1000, 900)
+        self.setMinimumSize(1000, 900)
 
-    def select_frame(self, name):
-        print(self.windows)
-        self.pantallas[self.windows].pack_forget()
-        self.pantallas[name].pack(fill="both", expand=True)
-        self.windows = name
+        # Widget central
+        central_widget = QWidget()
+        self.setCentralWidget(central_widget)
 
+        # Layout principal horizontal
+        main_layout = QHBoxLayout()
+        central_widget.setLayout(main_layout)
 
-    def iniciar(self):
-        self.root.mainloop()
+        # Agregar sidebar
+        main_layout.addWidget(self.side_lateral())
+
+        # Agregar área central vacía (por ahora)
+        contenido = QWidget()
+        contenido.setStyleSheet(f"background-color: {desing.COLORS["bg.primary"]};")
+        main_layout.addWidget(contenido)
+
+    def side_lateral(self) -> QWidget:
+        sidebar_layout = QVBoxLayout()
+        btn_text: dict = self.lenguage.get("menu", "App")
+        windows = {
+            btn_text.get("home", "App"),
+            btn_text.get("delivered", "App"),
+            btn_text.get("rider", "App"),
+        }
+        for window in windows:
+            btn = QPushButton(window)
+            sidebar_layout.addWidget(btn)
+        sidebar_layout.addStretch()
+
+        sidebar_widget = QWidget()
+        sidebar_widget.setLayout(sidebar_layout)
+        sidebar_widget.setFixedWidth(200)
+        sidebar_widget.setStyleSheet(f"""
+            background-color: {desing.COLORS["bg.surface"]};
+            color: white;
+        """)
+
+        return sidebar_widget

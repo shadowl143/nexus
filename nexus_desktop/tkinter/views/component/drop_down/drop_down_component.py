@@ -2,7 +2,11 @@ import ttkbootstrap as tb
 from ttkbootstrap.constants import *
 
 
-class DropDownComponent:
+class DropDownComponent(tb.Combobox):
+
+    DEFAULT_PADX = 15
+    DEFAULT_PADY = 15
+
     def __init__(self, parent, options, **kwargs):
         super().__init__(**kwargs)
         self.parent = parent
