@@ -1,15 +1,15 @@
 import ttkbootstrap as tb
 
+
 class NumericEntry(tb.Entry):
     """Solo números enteros"""
+
     DEFAULT_PADX = 15
     DEFAULT_PADY = 15
 
     def __init__(self, parent, **kwargs):
 
-        validator = parent.register(
-            lambda value: value.isdigit() or value == ""
-        )
+        validator = parent.register(lambda value: value.isdigit() or value == "")
 
         super().__init__(
             parent,
@@ -18,7 +18,7 @@ class NumericEntry(tb.Entry):
             validatecommand=(validator, "%P"),
             **kwargs
         )
-    
+
     # Defaults para pack
     def pack(self, **kwargs):
         kwargs.setdefault("padx", self.DEFAULT_PADX)

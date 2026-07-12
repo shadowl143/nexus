@@ -1,5 +1,4 @@
 import ttkbootstrap as tb
-from ttkbootstrap.constants import *
 
 
 class DropDownComponent(tb.Combobox):

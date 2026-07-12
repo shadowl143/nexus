@@ -40,7 +40,7 @@ class MessageBox(Messagebox):
         return respuesta
 
     def msg_information(self) -> None:
-        respuesta = Messagebox.show_info(
+        Messagebox.show_info(
             title=self.title,
             message=self.message,
             parent=self.parent,

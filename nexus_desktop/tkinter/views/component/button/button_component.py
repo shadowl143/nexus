@@ -1,5 +1,4 @@
 import ttkbootstrap as tb
-import nexus_core.design_tokens as design
 
 
 class WidgetButtons(tb.Button):

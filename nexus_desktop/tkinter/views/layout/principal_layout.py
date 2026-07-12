@@ -1,7 +1,6 @@
 import ttkbootstrap as tb
 import os
 import sys
-from nexus_core.design_tokens import TYPOGRAPHY
 from nexus_core.theme import mode_dark
 import tkinter as tk
 from nexus_desktop.tkinter.views.frame.inicio import inicio_frame as inicio
@@ -15,7 +14,6 @@ from nexus_desktop.tkinter.services.entregas.entregas_service import EntregaServ
 from nexus_desktop.tkinter.controllers.entregas.entrega_controller import (
     EntregaController,
 )
-import os
 
 rider_service = RiderService()
 ridercontroller = RiderController(rider_service)

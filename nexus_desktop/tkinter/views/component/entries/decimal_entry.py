@@ -1,10 +1,12 @@
 import ttkbootstrap as tb
 
+
 class DecimalEntry(tb.Entry):
     """Permite números decimales"""
 
     DEFAULT_PADX = 15
     DEFAULT_PADY = 15
+
     def __init__(self, parent, **kwargs):
 
         validator = parent.register(self.validate_decimal)
@@ -16,7 +18,7 @@ class DecimalEntry(tb.Entry):
             validatecommand=(validator, "%P"),
             **kwargs
         )
-    
+
     # Defaults para pack
     def pack(self, **kwargs):
         kwargs.setdefault("padx", self.DEFAULT_PADX)

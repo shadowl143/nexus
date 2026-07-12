@@ -68,9 +68,7 @@ def apply_theme(app: tb.Window, colors: dict):
 
 
 def mode_dark(app, value: bool):
-    if value == True:
+    if value:
         apply_theme(app, design.COLORS_DARK)
-        value = True
     else:
         apply_theme(app, design.COLORS)
-        value = False

@@ -38,21 +38,6 @@ class TableFrame(QWidget):
         layout.addWidget(self.table)
         self.setLayout(layout)
 
-        # Estilo opcional
-        self.setStyleSheet("""
-            QTableWidget {
-                background-color: white;
-                border: 1px solid #ddd;
-                gridline-color: #eee;
-            }
-            QHeaderView::section {
-                background-color: #2c3e50;
-                color: white;
-                padding: 5px;
-                border: none;
-            }
-        """)
-
     # ✅ Método reutilizable para recargar datos
     def load_data(self, data):
         self.table.setRowCount(len(data))

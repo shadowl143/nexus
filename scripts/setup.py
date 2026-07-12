@@ -2,19 +2,23 @@
 import platform
 import subprocess
 
+
 def setup_windows():
     print("Configuración para windows...")
     subprocess.run(["pip", "install", "windows-specific-package"])
+
 
 def setup_mac():
     print("Configuración para MacOs...")
     # Ejemplo: instalar un paquete específico de macOS
     subprocess.run(["pip", "install", "macos-specific-package"])
 
+
 def setup_linux():
     print("Configuración para Linux...")
     # Ejemplo: instalar un paquete específico de Linux
     subprocess.run(["pip", "install", "linux-specific-package"])
+
 
 def main():
     os_type = platform.system()
@@ -28,6 +32,7 @@ def main():
         setup_linux()
     else:
         print("No es posible reconocer el sistema operativo")
+
 
 if __name__ == "__main__":
     main()
