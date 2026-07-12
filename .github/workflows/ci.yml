@@ -1,47 +1,48 @@
-name: Continuous Integration (Nexus Core)
+name: Nexus CI
 
 on:
   push:
-    branches: [ "main", "develop" ]
+    branches: [ main, develop ]
   pull_request:
-    branches: [ "main", "develop" ]
+    branches: [ main, develop ]
 
 jobs:
-  build-and-test:
+  test:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+
     steps:
-    # 1. Descargar el código del repositorio
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    # 2. Configurar la versión de Python
-    - name: Set up Python
-      uses: actions/with-python@v5
-      with:
-        python-version: '3.11' # Ajusta a la versión exacta que uses
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
 
-    # 3. Configurar Caché de Pip para acelerar futuras ejecuciones
-    - name: Cache pip packages
-      uses: actions/cache@v4
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements-dev.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
 
-    # 4. Instalar dependencias en el entorno virtual del servidor
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
+      - name: Lint with Ruff
+        run: |
+          ruff check .
 
-    # 5. Inicializar base de datos de prueba (SQLite local)
-    - name: Setup SQLite Test Database
-      run: |
-        touch nexus.db
+      - name: Type check with MyPy
+        run: |
+          mypy nexus_core nexus_desktop nexus_web nexus_analytics
 
-    # 6. Ejecutar pruebas unitarias (Buscando la carpeta 'tests/' de tu imagen)
-    - name: Run tests with pytest
-      run: |
-        pytest
+      - name: Run Tests
+        run: |
+          pytest --cov=nexus_core --cov=nexus_desktop --cov=nexus_web --cov=nexus_analytics --cov-report=term-missing
+
+      - name: Upload Coverage Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: .coverage
