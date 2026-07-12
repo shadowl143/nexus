@@ -74,11 +74,10 @@ python -m unittest unitedtest.tkinter.inicio_test.test_inicio_frame
 
 ## Estructura del proyecto
 
-![CI](https://github.com/tuuser/nexus/actions/workflows/ci.yml/badge.svg)
 ![Python](https://img.shields.io/badge/python-3.12-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Coverage](https://img.shields.io/badge/coverage-95%25-brightgreen)
 
+```
 nexus/
 │
 ├── nexus_core/ # Dominio y lógica de negocio
@@ -98,3 +97,4 @@ nexus/
 ├── pyproject.toml
 ├── README.md
 └── LICENSE
+```
