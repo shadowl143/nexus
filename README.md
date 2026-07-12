@@ -74,34 +74,27 @@ python -m unittest unitedtest.tkinter.inicio_test.test_inicio_frame
 
 ## Estructura del proyecto
 
-NEXUS/
+![CI](https://github.com/tuuser/nexus/actions/workflows/ci.yml/badge.svg)
+![Python](https://img.shields.io/badge/python-3.12-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Coverage](https://img.shields.io/badge/coverage-95%25-brightgreen)
+
+nexus/
 │
-├── .github/
-│ └── workflows/ # CI/CD pipelines (GitHub Actions)
-│
-├── .mypy_cache/ # Cache de mypy
-├── .ruff_cache/ # Cache de ruff (lint)
-├── .vscode/ # Configuración del workspace
-│
-├── docs/ # Documentación y assets
-│
-├── e2e/ # Tests end-to-end
-├── integration/ # Tests de integración
-├── test/ # Tests unitarios
-│
-├── nexus_core/ # Lógica de negocio (dominio)
+├── nexus_core/ # Dominio y lógica de negocio
+├── nexus_api/ # API (FastAPI)
 ├── nexus_desktop/ # Cliente de escritorio (PyQt6)
 ├── nexus_web/ # Cliente web
-├── nexus_analytics/ # Módulo de analítica
+├── nexus_analytics/ # Procesamiento y métricas
 │
-├── scripts/ # Scripts de setup / utilidades
+├── tests/
+│ ├── unit/
+│ ├── integration/
+│ └── e2e/
 │
-├── venv/ # Entorno virtual (no debería versionarse)
-├── .env # Variables de entorno
+├── docs/ # Documentación y arquitectura
+├── scripts/ # Scripts de automatización
 │
-├── .gitignore
-├── LICENCE
-├── pyproject.toml # Configuración del proyecto
-├── requirements.txt
-├── requirements-dev.txt
-└── README.md
+├── pyproject.toml
+├── README.md
+└── LICENSE
