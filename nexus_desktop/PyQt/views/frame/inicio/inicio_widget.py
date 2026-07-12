@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QFormLayout
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QFormLayout, QCheckBox
 from nexus_desktop.PyQt.views.component.label.label_tittle_widget import (
     LabelTitleWidget,
 )
@@ -16,14 +16,15 @@ class InicioWidget(QWidget):
         super().__init__()
         self.language = MultiLanguageService().load_transaction()
         layout = QVBoxLayout(self)
-        optionsddr = QFormLayout()
+        form = QFormLayout()
 
         title = LabelTitleWidget(text=self.language.get("welcome", "app"))
 
         text = LabelTextWidget(text="lenguaje")
         ddr = DropDownComponent(options=["es_MX", "en_US"])
+        check = QCheckBox(text="Modo oscuro")
 
+        form.addRow(check)
+        form.addRow(text, ddr)
         layout.addWidget(title)
-        optionsddr.addWidget(text)
-        optionsddr.addWidget(ddr)
-        layout.addLayout(optionsddr)
+        layout.addLayout(form)

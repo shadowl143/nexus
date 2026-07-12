@@ -1,8 +1,4 @@
 {
-  "tittles": {
-    "rider": "Rider catalog",
-    "delivered": "Delivered Catalog"
-  },
   "welcome": "welcome to the app test",
   "id": "id",
   "name": "Name",
@@ -13,6 +9,10 @@
   "bottons": {
     "save": "Save",
     "cancel": "Cancel"
+  },
+  "tittles": {
+    "rider": "Rider catalog",
+    "delivered": "Delivered Catalog"
   },
   "message_modal": {
     "save": "Are you sure you want to save the data?",

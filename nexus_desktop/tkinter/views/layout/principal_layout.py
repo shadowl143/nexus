@@ -14,12 +14,17 @@ from nexus_desktop.tkinter.services.entregas.entregas_service import EntregaServ
 from nexus_desktop.tkinter.controllers.entregas.entrega_controller import (
     EntregaController,
 )
+from nexus_desktop.tkinter.services.multi_lenguage.multi_lenguage_service import (
+    MultiLanguageService,
+)
 
 rider_service = RiderService()
 ridercontroller = RiderController(rider_service)
 
 entregas_service = EntregaService()
 entrega_controller = EntregaController(entregas_service)
+
+multilanguage = MultiLanguageService("en_US")
 
 
 class WindowsPrincipal:
@@ -76,13 +81,20 @@ class WindowsPrincipal:
 
         frames = {
             "Inicio": lambda contenedor: inicio.InicioFrame(
-                contenedor, self.languge, self.dark_var, self.toggle_theme
+                contenedor,
+                self.languge,
+                self.dark_var,
+                self.toggle_theme,
+                multilanguage,
             ).crear_frame_inicio(),
             "Entregas": lambda contenedor: entregas.EntregasFrame(
-                contenedor, self.languge.get(), entrega_controller, ridercontroller
+                contenedor,
+                entrega_controller,
+                ridercontroller,
+                multilanguage,
             ).crear_frame_inicio(),
             "Riders": lambda contenedor: rider.RidesFrame(
-                contenedor, self.languge.get(), ridercontroller
+                contenedor, self.languge.get(), ridercontroller, multilanguage
             ).crear_frame_inicio(),
         }
         return frames

@@ -29,9 +29,9 @@ class EntregasFrame:
     def __init__(
         self,
         contenedor_principal,
-        language: str,
         entrega_controller: EntregaController,
         rider_controller: RiderController,
+        multilanguage: MultiLanguageService,
     ):
         self.contenedor_principal = contenedor_principal
         self.rider_controller = rider_controller
@@ -40,7 +40,7 @@ class EntregasFrame:
         self.info: list[EntregaVm] = self.rider_controller.rider_select()
 
         # texto
-        self.lenguage = MultiLanguageService(language=language).load_transaction()
+        self.lenguage = multilanguage.load_transaction()
         self.id = self.lenguage["id"]
         self.name = self.lenguage["name"]
         self.distance = self.lenguage["distance"]

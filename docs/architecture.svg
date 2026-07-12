@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1000" height="800" xmlns="http://www.w3.org/2000/svg">
+
+  <style>
+    .box { fill:#f4f6f8; stroke:#2c3e50; stroke-width:2; rx:10; ry:10; }
+    .core { fill:#e8f4ff; stroke:#1f4e79; stroke-width:3; }
+    .text { font-family: Arial, sans-serif; font-size:14px; fill:#2c3e50; }
+    .title { font-size:16px; font-weight:bold; }
+    .arrow { stroke:#34495e; stroke-width:2; marker-end:url(#arrowhead); }
+  </style>
+
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7"
+      refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#34495e"/>
+    </marker>
+  </defs>
+
+  <!-- Desktop -->
+  <rect x="100" y="80" width="300" height="120" class="box"/>
+  <text x="250" y="105" text-anchor="middle" class="text title">nexus_desktop</text>
+  <text x="120" y="130" class="text">Views</text>
+  <text x="120" y="150" class="text">Controllers</text>
+  <text x="120" y="170" class="text">Services</text>
+
+  <!-- Web -->
+  <rect x="600" y="80" width="300" height="120" class="box"/>
+  <text x="750" y="105" text-anchor="middle" class="text title">nexus_web</text>
+  <text x="620" y="130" class="text">Routers</text>
+  <text x="620" y="150" class="text">Templates</text>
+  <text x="620" y="170" class="text">Static</text>
+
+  <!-- Analytics -->
+  <rect x="350" y="250" width="300" height="100" class="box"/>
+  <text x="500" y="275" text-anchor="middle" class="text title">nexus_analytics</text>
+  <text x="370" y="300" class="text">App</text>
+  <text x="370" y="320" class="text">Pipeline</text>
+
+  <!-- Core -->
+  <rect x="250" y="400" width="500" height="260" class="core"/>
+  <text x="500" y="430" text-anchor="middle" class="text title">nexus_core (Dominio Central)</text>
+
+  <text x="270" y="460" class="text">bus.py (Event Bus)</text>
+  <text x="270" y="480" class="text">design_tokens.py</text>
+  <text x="270" y="510" class="text">events/contracts.py</text>
+
+  <text x="270" y="540" class="text">services/</text>
+  <text x="290" y="560" class="text">- shipment_service</text>
+  <text x="290" y="580" class="text">- kpi_service</text>
+  <text x="290" y="600" class="text">- alert_service</text>
+  <text x="290" y="620" class="text">- audit_service</text>
+
+  <text x="270" y="650" class="text">models/schemas.py</text>
+
+  <!-- Arrows -->
+  <line x1="250" y1="200" x2="450" y2="400" class="arrow"/>
+  <line x1="750" y1="200" x2="550" y2="400" class="arrow"/>
+  <line x1="500" y1="350" x2="500" y2="400" class="arrow"/>
+
+</svg>

@@ -10,12 +10,16 @@ def apply_theme(app: QApplication, colors: dict, typography: dict):
         color: {colors["text.primary"]};
     }}
 
+    QWidget#menu {{
+        background-color: {colors["bg.menu"]};
+        color: {colors["text.primary"]};
+    }}
+
     QFrame {{
         background-color: {colors["bg.primary"]};
     }}
-
     QLabel {{
-        background-color: {colors["bg.primary"]};
+        background-color: transparent;
         color: {colors["text.primary"]};
     }}
 
@@ -27,7 +31,7 @@ def apply_theme(app: QApplication, colors: dict, typography: dict):
     }}
 
     QCheckBox {{
-        background-color: {colors["bg.surface"]};
+        background-color: transparent;
         color: {colors["text.primary"]};
     }}
 
@@ -39,8 +43,16 @@ def apply_theme(app: QApplication, colors: dict, typography: dict):
         font-weight: bold;
     }}
 
+    QPushButton#btnCancel {{
+        background-color: {colors["accent.danger"]};
+    }}
     QPushButton:hover {{
-        background-color: {colors["accent.primary"]};
+        background-color: {colors["bg.surface"]};
+        opacity: 0.85;
+    }}
+
+    QPushButton:pressed {{
+        background-color: {colors["text.muted"]};
         opacity: 0.85;
     }}
 

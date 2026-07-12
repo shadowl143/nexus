@@ -18,15 +18,17 @@ class InicioFrame:
         language: tk.StringVar,
         mode: tk.BooleanVar,
         toggle_callback,
+        multilanguage_class: MultiLanguageService,
     ):
         self.contenedor_principal = contenedor_principal
-        self.lenguage_value = MultiLanguageService(
-            language=language.get()
-        ).load_transaction()
+        self.multilanguage_class = multilanguage_class
         self.language = language
         self.dark_var = mode
         self.toggle_callback = toggle_callback
         self.combo = DropDownComponent
+
+        # cargar idioma inicial
+        self.lenguage_value = self.multilanguage_class.load_transaction()
 
     def crear_frame_inicio(self) -> tb.Frame:
         p_inicio = tb.Frame(self.contenedor_principal)
@@ -47,7 +49,5 @@ class InicioFrame:
         return p_inicio
 
     def change_language(self, value: str):
-
-        self.lenguage_value = MultiLanguageService(language=value).load_transaction()
         self.language.set(value)
-        print(self.combo.get())
+        self.lenguage_value = self.multilanguage_class.load_transaction()

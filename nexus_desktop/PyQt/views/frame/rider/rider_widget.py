@@ -4,37 +4,48 @@ from nexus_desktop.PyQt.views.component.entries.letter_entry import LettersEntry
 from nexus_desktop.PyQt.views.component.button.button_component import WidgetButton
 from nexus_desktop.PyQt.services.multi_lenguage_service import MultiLanguageService
 from nexus_desktop.PyQt.controllers.rider.rider_controller import RiderController
+from nexus_desktop.PyQt.views.component.label.label_tittle_widget import (
+    LabelTitleWidget,
+)
 
 
 class RiderWidget(QWidget):
-    def __init__(self, controller: RiderController, language="es_MX"):
+    def __init__(self, controller: RiderController, language: MultiLanguageService):
         super().__init__()
-        language = MultiLanguageService(language).load_transaction()
-        layout = QHBoxLayout(self)
-        left_layout = QVBoxLayout()
-        right_layout = QFormLayout()
+        self.multi = language
+        self.language = self.multi.load_transaction()
+        self.layout_principal = QVBoxLayout(self)
+        self.layout_horizontal = QHBoxLayout()
+        layout_btns = QHBoxLayout()
+        self.left_layout = QVBoxLayout()
+        self.right_layout = QFormLayout()
 
+        self.title = LabelTitleWidget(text=self.language["tittles"]["rider"])
+        self.name = self.language["name"]
         # left
         table = TableFrame(
             columns=[
-                language.get("Id", "Id"),
-                language.get("name", "Nombre"),
-                language.get("rider_type", "Tipo rider"),
+                self.language.get("Id", "Id"),
+                self.language.get("name", "Nombre"),
+                self.language.get("rider_type", "Tipo rider"),
             ],
             data=controller.rider_list(),
         )
-        left_layout.addWidget(table)
+        self.left_layout.addWidget(table)
 
         # rigth
-        right_layout.addRow("Nombre", LettersEntry())
-        right_layout.addRow("tipo de rider", LettersEntry())
-        layout_btns = QHBoxLayout()
+        self.right_layout.addRow(self.name, LettersEntry())
+        self.right_layout.addRow("tipo de rider", LettersEntry())
         layout_btns.addStretch()
         btnSuccess = WidgetButton()
         btnCancel = WidgetButton(button_text="Cancelar")
+        btnCancel.setObjectName("btnCancel")
         layout_btns.addWidget(btnCancel)
         layout_btns.addWidget(btnSuccess)
-        right_layout.addRow(layout_btns)
+        self.right_layout.addRow(layout_btns)
 
-        layout.addLayout(left_layout)
-        layout.addLayout(right_layout)
+        self.layout_horizontal.addLayout(self.left_layout)
+        self.layout_horizontal.addLayout(self.right_layout)
+
+        self.layout_principal.addWidget(self.title)
+        self.layout_principal.addLayout(self.layout_horizontal)

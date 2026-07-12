@@ -1,6 +1,7 @@
 COLORS = {
     "bg.primary": "#143A93",  # slate-900
     "bg.surface": "#1E293B",  # slate-800
+    "bg.menu": "#7C90B1",  # slate-800
     "accent.primary": "#3B82F6",  # blue-500
     "accent.warn": "#F59E0B",  # amber-500
     "accent.danger": "#EF4444",  # red-500

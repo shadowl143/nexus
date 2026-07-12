@@ -4,15 +4,15 @@ from nexus_desktop.PyQt.view_model.entregas_vm import EntregaVm
 
 class EntregaController:
 
-    def __init__(self, rider_service: EntregaService):
-        self.rider_service = rider_service
+    def __init__(self, entrega_service: EntregaService):
+        self.entrega_service = entrega_service
 
-    def rider_list(self) -> list[EntregaVm]:
-        rider = self.rider_service.entregas_list()
-        return rider
+    def entregas_list(self) -> list[EntregaVm]:
+        entrega = self.entrega_service.entregas_list()
+        return entrega
 
-    def save_rider(self, rider: EntregaVm):
-        self.rider_service.save_entrega(rider)
+    def save_entrega(self, entrega: EntregaVm):
+        self.entrega_service.save_entrega(entrega)
 
-    def remove_rider(self, rider: EntregaVm):
-        self.rider_service.remove_entrega(rider)
+    def remove_entrega(self, entrega: EntregaVm):
+        self.entrega_service.remove_entrega(entrega)

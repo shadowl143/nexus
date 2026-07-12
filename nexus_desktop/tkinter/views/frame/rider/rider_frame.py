@@ -18,12 +18,16 @@ from nexus_desktop.tkinter.view_model.rider_vm import RiderVM
 
 class RidesFrame:
     def __init__(
-        self, contenedor_principal, language: str, rider_controller: RiderController
+        self,
+        contenedor_principal,
+        language: str,
+        rider_controller: RiderController,
+        multilanguage: MultiLanguageService,
     ):
         self.contenedor_principal = contenedor_principal
         self.rider_controller = rider_controller
         self.data = rider_controller.rider_list()
-        self.lenguage = MultiLanguageService(language=language).load_transaction()
+        self.lenguage = multilanguage.load_transaction()
         self.name = self.lenguage["name"]
         self.bike_type = self.lenguage["bike_type"]
         self.rider_id = self.lenguage["co2_saved"]

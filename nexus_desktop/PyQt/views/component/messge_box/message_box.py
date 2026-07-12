@@ -1,50 +1,22 @@
-from ttkbootstrap.dialogs import Messagebox
-from ttkbootstrap.style import Style
-import nexus_core.design_tokens as design
+from PyQt6.QtWidgets import QMessageBox
 
 
-class MessageBox(Messagebox):
-    def __init__(self, parent, title: str, message: str, icon="info"):
-        super().__init__()
-        self.parent = parent
-        self.title = title
-        self.message = message
-        style = Style()
-        style.configure(
-            ".",
-            font=(
-                design.TYPOGRAPHY["font.family.sans"],
-                design.TYPOGRAPHY["font.size.body"],
-            ),
-        )
-        style.configure(
-            "TButton",
-            font=(
-                design.TYPOGRAPHY["font.family.sans"],
-                design.TYPOGRAPHY["font.size.body"],
-            ),
-        )
-        self.principal = design.COLORS["accent.primary"]
-        self.cancel = design.COLORS["accent.danger"]
+class MessageBoxWidget:
 
-    def msg_save(self) -> str:
-        respuesta = Messagebox.yesno(
-            title=self.title,
-            message=self.message,
-            parent=self.parent,
-            buttons=[
-                f"Si:{self.principal}",
-                f"No:{self.cancel}",
-            ],
+    @staticmethod
+    def confirm(parent, title="Información", message="Mensaje del usuario") -> bool:
+        respuesta = QMessageBox.question(
+            parent,
+            title,
+            message,
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
         )
-        return respuesta
+        return respuesta == QMessageBox.StandardButton.Yes
 
-    def msg_information(self) -> None:
-        Messagebox.show_info(
-            title=self.title,
-            message=self.message,
-            parent=self.parent,
-            buttons=[
-                f"Ok:{self.principal}",
-            ],
-        )
+    @staticmethod
+    def information(parent, title="Información", message="Mensaje del usuario") -> None:
+        QMessageBox.information(parent, title, message)
+
+    @staticmethod
+    def error_critical(parent, title="Error", error_messge="Error inesperado"):
+        QMessageBox.critical(parent, title, error_messge)
